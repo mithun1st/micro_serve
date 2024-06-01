@@ -2,25 +2,25 @@
 
 [![pub package](https://img.shields.io/pub/v/micro_serve.svg)](https://pub.dev/packages/micro_serve)
 
-The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages HTTP requests.
+The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages requests and server-side operations within applications.
 
 
 ## Features
 
-- **HTTP Handling**
--- Ability to handle incoming HTTP requests and send appropriate responses.
+- **HTTP Handling:**
+*Manage incoming HTTP requests and send responses.*
 
-- **Routing**
--- Support for defining routes (GET, POST, PUT, DELETE, PATCH) and mapping them to specific request handlers.
+- **Routing:**
+*Define routes (GET, POST, PUT, DELETE, PATCH) and link them to request handlers.*
 
-- **Request Parsing**
--- Capability to read and parse query parameters and body data from incoming requests.
+- **Request Parsing:**
+*Read and parse query parameters and body data from requests.*
 
-- **Response Handling**
--- Ability to construct and send structured responses to clients, including setting status codes, headers, and body content.
+- **Response Handling:**
+*Create and send responses with status codes, headers, and content.*
 
-- **Error Handling**
--- Mechanism to handle server-side, method errors gracefully and send appropriate error responses to clients.
+- **Error Handling:**
+*Gracefully manage errors and send appropriate error responses.*
 
 
 ## Getting started
@@ -28,7 +28,7 @@ The `micro_serve` package for Flutter is designed to initialize an HTTP server t
 > Add the package to your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  micro_serve: ^<latest version>
+  micro_serve: <latest version>
 ```
 
 
@@ -60,9 +60,5 @@ void main() {
 
 ## Additional information
 
-This package simplifies server-side operations within a Flutter application, making it ideal for developers looking to integrate server capabilities directly into their apps.
-
 This `Micro Server` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/).
-> [LinkedIn](https://www.linkedin.com/in/mithun1st/).
-> [GitHub](https://www.github.com/mithun1st/)
-> [Website](https://mithun1st.blogspot.com/)
+> [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)

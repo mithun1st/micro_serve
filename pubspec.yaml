@@ -1,6 +1,7 @@
 name: micro_serve
-description: The package for Flutter is designed to initialize an HTTP server that efficiently manages HTTP requests.
-version: 1.0.0
+description: A Flutter package initializes an HTTP server to handle HTTP requests.
+
+version: 1.0.3
 
 homepage: https://mithun1st.blogspot.com/
 repository: https://www.github.com/mithun1st/

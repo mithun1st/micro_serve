@@ -6,7 +6,7 @@ void main() {
 
   server.get("/hello", (ServerContext serverContext) async {
     Response response = Response(
-      statusCode: 200,
+      statusCode: HttpStatus.ok_200.code,
       data: "Welcome Micro-Serve",
     );
     serverContext.send(response);
@@ -27,4 +27,7 @@ void main() {
   });
 
   server.listen(ipAddress: "127.0.0.1", port: 2000);
+
+  // print(server.info.isRunning);
+  // print(server.info.addressType);
 }
