@@ -1,7 +1,9 @@
 name: micro_serve
-description: A starting point for Dart libraries or applications.
+description: The package for Flutter is designed to initialize an HTTP server that efficiently manages HTTP requests.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+
+homepage: https://mithun1st.blogspot.com/
+repository: https://www.github.com/mithun1st/
 
 environment:
   sdk: ^3.4.1
