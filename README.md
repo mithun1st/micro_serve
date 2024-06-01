@@ -60,5 +60,5 @@ void main() {
 
 ## Additional information
 
-This `Micro Server` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/).
+`Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
 > [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)
