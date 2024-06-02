@@ -60,5 +60,10 @@ void main() {
 
 ## Additional information
 
+The functionality is not supported on Web.
+| Android | iOS | MacOS | Web | Linux | Windows |
+| :-----: | :-: | :---: | :-: | :---: | :----: |
+|   ✅    | ✅  |  ✅   | ❌  |  ✅   |   ✅   |
+
 `Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
 > [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)

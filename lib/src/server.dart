@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:micro_serve/src/common/common.dart';
 
-abstract class BaseService {
+abstract class _BaseService {
   static HttpServer? _hServer;
 
   Future<void> _write(HttpRequest httpRequest, Response response) async {
@@ -10,7 +10,7 @@ abstract class BaseService {
     httpRequest.response.write(response.data);
     await httpRequest.response.close();
     final DateTime dt = DateTime.now();
-    Logger.info("${DTFormat.date(dt)} - ${DTFormat.time(dt)}\t${httpRequest.method}\t${response.statusCode}\t${httpRequest.uri.path}");
+    Logger.info("${Format.date(dt)} - ${Format.time(dt)}\t${httpRequest.method}\t${response.statusCode}\t${httpRequest.uri.path}");
   }
 
   Future<void> _threadOpen(HttpRequest httpRequest, Node node) async {
@@ -77,7 +77,7 @@ abstract class BaseService {
   }
 }
 
-class MicroServe extends BaseService {
+class MicroServe extends _BaseService {
   static final Map<String, Node> _nodeList = {};
   MicroServe() {
     _nodeList.clear();
@@ -122,14 +122,14 @@ class MicroServe extends BaseService {
     }
   }
 
-  void listen({required int port, String? ipAddress, NetworkType? setNetworkTypeIfIPUnknown}) async {
-    if (ipAddress == null && setNetworkTypeIfIPUnknown != null) {
-      ipAddress = await Network.getIp(setNetworkTypeIfIPUnknown);
-    }
-
+  void listen({required int port, String? ipAddress}) async {
     _showAllNode();
 
-    _start(ipAddress: ipAddress ?? NetworkType.local.ip, port: port, nodeList: _nodeList);
+    _start(
+      ipAddress: ipAddress!,
+      port: port,
+      nodeList: _nodeList,
+    );
   }
 
   Future<void> close({bool? clearNode}) async {

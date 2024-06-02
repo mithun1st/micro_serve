@@ -1,4 +1,5 @@
 import 'package:micro_serve/src/common/common.dart';
+import 'package:micro_serve/src/constant/format.dart';
 
 class ServerContext {
   final Request request;
@@ -32,10 +33,10 @@ class Response {
 
   factory Response.methodNotAllowed() => Response(
         statusCode: HttpStatus.methodNotAllowed_405.code,
-        data: Const.responseJsonFormat("Method Not Allowed"),
+        data: Format.responseJsonFormat("Method Not Allowed"),
       );
   factory Response.internalServerError(String error) => Response(
         statusCode: HttpStatus.internalServerError_500.code,
-        data: Const.responseJsonFormat(error),
+        data: Format.responseJsonFormat(error),
       );
 }

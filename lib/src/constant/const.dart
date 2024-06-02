@@ -1,6 +1,3 @@
 class Const {
-  static Map responseJsonFormat(String message) => {
-        "timestamp": DateTime.now().toIso8601String(),
-        "message": message,
-      };
+  static const String localIp = "127.0.0.1";
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:micro_serve/micro_serve.dart';
 
-void main() {
+void main() async {
   final MicroServe server = MicroServe();
 
   server.post("/test", (ServerContext serverContext) async {
@@ -13,7 +13,6 @@ void main() {
       "userName": userName,
       "sum": num1 + num2,
     };
-
     Response response = Response(statusCode: 202, data: map);
     serverContext.send(response);
   });
@@ -26,5 +25,6 @@ void main() {
     serverContext.send(response);
   });
 
+  await Network.getIp(NetworkType.local);
   server.listen(ipAddress: "127.0.0.1", port: 2000);
 }
