@@ -31,6 +31,20 @@ dependencies:
   micro_serve: <latest version>
 ```
 
+> Open `android/app/src/main/AndroidManifest.xml` and add this line:
+```xml
+<manifest xmlns:android="...">
+  <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
+  <application....>
+</manifest>
+```
+
+> macOS apps must allow network access in the relevant *.entitlements files:
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
+
 > Import the Package:
 ```dart
 import 'package:micro_serve/micro_serve.dart';

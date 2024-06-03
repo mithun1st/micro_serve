@@ -1,3 +1,6 @@
+## 1.0.6
+- Add <uses-permission android:name="android.permission.INTERNET"/>
+
 ## 1.0.5
 - CallBack function add after initiated server
 - Response data will encode while json
