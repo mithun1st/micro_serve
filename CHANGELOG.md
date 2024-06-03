@@ -1,3 +1,9 @@
+## 1.0.5
+- CallBack function add after initiated server
+- Response data will encode while json
+- Add example/lib/main.go
+- Also with some minor changes
+
 ## 1.0.4
 - Git link added
 

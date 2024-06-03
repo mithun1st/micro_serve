@@ -45,6 +45,8 @@ extension HttpStatusCode on HttpStatus {
         return 403;
       case HttpStatus.notFound_404:
         return 404;
+      case HttpStatus.conflict_409:
+        return 409;
       case HttpStatus.methodNotAllowed_405:
         return 405;
       case HttpStatus.internalServerError_500:

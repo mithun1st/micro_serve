@@ -7,6 +7,9 @@ abstract class _BaseService {
 
   Future<void> _write(HttpRequest httpRequest, Response response) async {
     httpRequest.response.statusCode = response.statusCode ?? HttpStatus.accepted_202.code;
+    if (response.data is Map || response.data is List) {
+      response.data = jsonEncode(response.data);
+    }
     httpRequest.response.write(response.data);
     await httpRequest.response.close();
     final DateTime dt = DateTime.now();
@@ -39,10 +42,12 @@ abstract class _BaseService {
     }
   }
 
-  Future<void> _start({required String ipAddress, required int port, required Map<String, Node> nodeList}) async {
+  Future<void> _start({required String ipAddress, required int port, required Map<String, Node> nodeList, required Function callBack}) async {
     _hServer = await HttpServer.bind(ipAddress, port);
 
-    Logger.print("Listening on ${_hServer?.address.address}:${_hServer?.port}", 'debug');
+    Logger.print("Server listening on ${_hServer?.address.address}:${_hServer?.port}", 'debug');
+
+    callBack();
 
     await for (HttpRequest httpRequest in _hServer ?? ([] as HttpServer)) {
       final String path = httpRequest.uri.path;
@@ -56,14 +61,18 @@ abstract class _BaseService {
       }
     }
 
-    Logger.print("Listening off", 'debug');
+    Logger.print("Server has been turned off", 'debug');
   }
 
   Future<void> _stop() async {
     await _hServer?.close();
+    _hServer = null;
   }
 
   ServerInfo get info {
+    if (_hServer == null) {
+      return ServerInfo(isRunning: false);
+    }
     try {
       return ServerInfo(
         address: _hServer?.address.address,
@@ -86,9 +95,10 @@ class MicroServe extends _BaseService {
   void _addNode(Node node) {
     if (!_nodeList.containsKey(node.path)) {
       _nodeList[node.path] = node;
-    } else {
-      Logger.error("'${node.path}' path already exist");
     }
+    // else {
+    //   Logger.error("'${node.path}' path already exist");
+    // }
   }
 
   void post(String path, Function(ServerContext) handler) {
@@ -122,13 +132,14 @@ class MicroServe extends _BaseService {
     }
   }
 
-  void listen({required int port, String? ipAddress}) async {
+  void listen({required int port, String? ipAddress, Function? callBack}) {
     _showAllNode();
 
     _start(
-      ipAddress: ipAddress!,
+      ipAddress: ipAddress ?? Const.localIp,
       port: port,
       nodeList: _nodeList,
+      callBack: callBack ?? () {},
     );
   }
 

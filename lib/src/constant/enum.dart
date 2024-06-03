@@ -16,6 +16,7 @@ enum HttpStatus {
   unauthorized_401,
   forbidden_403,
   notFound_404,
+  conflict_409,
   methodNotAllowed_405,
   internalServerError_500,
 }

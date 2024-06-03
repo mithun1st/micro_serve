@@ -1,14 +1,13 @@
 import 'package:micro_serve/src/common/common.dart';
-import 'package:micro_serve/src/constant/format.dart';
 
 class ServerContext {
   final Request request;
   final Function(Response) send;
-  final String? clientIp;
+  // final String? clientIp;
   ServerContext({
     required this.request,
     required this.send,
-    this.clientIp,
+    // this.clientIp,
   });
 }
 
