@@ -6,7 +6,7 @@ abstract class _BaseService {
   static HttpServer? _httpServer;
 
   Future<void> _write(HttpRequest httpRequest, Response response) async {
-    httpRequest.response.statusCode = response.statusCode ?? HttpStatus.accepted_202.code;
+    httpRequest.response.statusCode = response.statusCode ?? HttpStatus.ok_200.code;
     if (response.data is Map || response.data is List) {
       response.data = jsonEncode(response.data);
     }

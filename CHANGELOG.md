@@ -1,10 +1,13 @@
+## 1.0.7
+- Set 200 statusCode as default
+
 ## 1.0.6
-- Add <uses-permission android:name="android.permission.INTERNET"/>
+- Add internet permission
 
 ## 1.0.5
 - CallBack function add after initiated server
 - Response data will encode while json
-- Add example/lib/main.go
+- Add example/lib/main.dart
 - Also with some minor changes
 
 ## 1.0.4
