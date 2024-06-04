@@ -31,7 +31,7 @@ dependencies:
   micro_serve: <latest version>
 ```
 
-> Open `android/app/src/main/AndroidManifest.xml` and add this line:
+> Open (android/app/src/main/) `AndroidManifest.xml` and add this line:
 ```xml
 <manifest xmlns:android="...">
   <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
@@ -39,7 +39,7 @@ dependencies:
 </manifest>
 ```
 
-> macOS apps must allow network access in the relevant *.entitlements files:
+> macOS apps must allow network access in the relevant `*.entitlements` files:
 ```xml
 <key>com.apple.security.network.client</key>
 <true/>
@@ -109,20 +109,20 @@ void _updateTask(ServerContext serverContext) {
   //Create an Object of Request() From ServerContext to Get Client Request
   final Request request = serverContext.request;
 
-  final int Id = int.parse(request.queryParams["id"]);
-  final Stirng name = jsonDecode(request.body)['name'];
-  final String idDone = jsonDecode(request.body)['isDone'];
+  final int id = int.parse(request.queryParams["id"]);
+  final String name = jsonDecode(request.body)['name'];
+  final bool isDone = jsonDecode(request.body)['isDone'];
 
   //Create an Object of Response() to Send Client
   final Response response = Response();
 
-  if (!_taskStore.containsKey(taskId)) {
+  if (!_taskStore.containsKey(id)) {
     //Edit Response Object as Preference 1
     response.statusCode = HttpStatus.notFound_404.code;
     response.data = {"message": "not found"};
   } else {
-    _taskStore[taskId]!.name = jsonDecode(request.body)['name'];
-    _taskStore[taskId]!.isDone = jsonDecode(request.body)['isDone'];
+    _taskStore[id]!.name = name;
+    _taskStore[id]!.isDone = isDone;
 
     //Edit Response Object as Preference 2
     response.statusCode = HttpStatus.accepted_202.code;
@@ -154,10 +154,17 @@ http://ip:port/update?id=1
 | Android | iOS | MacOS | Web | Linux | Windows |
 | :-----: | :-: | :---: | :-: | :---: | :----: |
 |   ✅    | ✅  |  ✅   | ❌  |  ✅   |   ✅   |
+
 The functionality is not supported on Web.
 
 
 ## Additional information
+
+> App Screen `example/lib/main.dart`:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/home_page.png" height="500" alt="Screenshots">
+</p>
 
 `Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
 > mithun.2121@yahoo.com | [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)
