@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:micro_serve/src/common/common.dart';
 
 abstract class _BaseService {
-  static HttpServer? _hServer;
+  static HttpServer? _httpServer;
 
   Future<void> _write(HttpRequest httpRequest, Response response) async {
     httpRequest.response.statusCode = response.statusCode ?? HttpStatus.accepted_202.code;
@@ -43,13 +43,13 @@ abstract class _BaseService {
   }
 
   Future<void> _start({required String ipAddress, required int port, required Map<String, Node> nodeList, required Function callBack}) async {
-    _hServer = await HttpServer.bind(ipAddress, port);
+    _httpServer = await HttpServer.bind(ipAddress, port);
 
-    Logger.print("Server listening on ${_hServer?.address.address}:${_hServer?.port}", 'debug');
+    Logger.print("Server listening on ${_httpServer?.address.address}:${_httpServer?.port}", 'debug');
 
     callBack();
 
-    await for (HttpRequest httpRequest in _hServer ?? ([] as HttpServer)) {
+    await for (HttpRequest httpRequest in _httpServer ?? ([] as HttpServer)) {
       final String path = httpRequest.uri.path;
       if (nodeList.keys.contains(path)) {
         final Node? node = nodeList[path];
@@ -65,19 +65,19 @@ abstract class _BaseService {
   }
 
   Future<void> _stop() async {
-    await _hServer?.close();
-    _hServer = null;
+    await _httpServer?.close();
+    _httpServer = null;
   }
 
   ServerInfo get info {
-    if (_hServer == null) {
+    if (_httpServer == null) {
       return ServerInfo(isRunning: false);
     }
     try {
       return ServerInfo(
-        address: _hServer?.address.address,
-        addressType: _hServer?.address.type.name,
-        port: _hServer?.port,
+        address: _httpServer?.address.address,
+        addressType: _httpServer?.address.type.name,
+        port: _httpServer?.port,
         isRunning: true,
       );
     } catch (_) {

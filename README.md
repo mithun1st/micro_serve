@@ -31,7 +31,7 @@ dependencies:
   micro_serve: <latest version>
 ```
 
-> Open `android/app/src/main/AndroidManifest.xml` and add this line:
+> Open (android/app/src/main/) `AndroidManifest.xml` and add this line:
 ```xml
 <manifest xmlns:android="...">
   <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
@@ -39,7 +39,7 @@ dependencies:
 </manifest>
 ```
 
-> macOS apps must allow network access in the relevant *.entitlements files:
+> macOS apps must allow network access in the relevant `*.entitlements` files:
 ```xml
 <key>com.apple.security.network.client</key>
 <true/>
