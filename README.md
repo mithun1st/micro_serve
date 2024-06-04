@@ -31,7 +31,7 @@ dependencies:
   micro_serve: <latest version>
 ```
 
-> Open (android/app/src/main/)`AndroidManifest.xml` and add this line:
+> Open (android/app/src/main/) `AndroidManifest.xml` and add this line:
 ```xml
 <manifest xmlns:android="...">
   <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
@@ -159,6 +159,10 @@ The functionality is not supported on Web.
 
 
 ## Additional information
+
+> App Screen `example/lib/main.dart`:
+
+![homepage](https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/home_page.png)
 
 `Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
 > mithun.2121@yahoo.com | [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)
