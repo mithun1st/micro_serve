@@ -1,5 +1,6 @@
 ## 1.0.7
 - Set 200 statusCode as default
+- update example/lib/main.dart
 
 ## 1.0.6
 - Add internet permission
