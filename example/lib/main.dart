@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Flexible(
-            flex: 2,
+            flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -191,18 +191,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Flexible(
-            flex: 5,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Text("API REFERENCE"),
-                  _textWidget(welcome),
-                  _textWidget(createTask),
-                  _textWidget(readTasks),
-                  _textWidget(updateTask),
-                  _textWidget(deleteTask),
-                ],
-              ),
+            flex: 4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("API REFERENCE"),
+                _textWidget(welcome),
+                _textWidget(createTask),
+                _textWidget(readTasks),
+                _textWidget(updateTask),
+                _textWidget(deleteTask),
+              ],
             ),
           ),
         ],
