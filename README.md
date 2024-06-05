@@ -4,6 +4,11 @@
 
 The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages requests and server-side operations within applications.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/animation.gif" height="400" alt="example">
+</p>
+
+
 
 ## Features
 
@@ -159,12 +164,6 @@ The functionality is not supported on Web.
 
 
 ## Additional information
-
-> App Screen `example/lib/main.dart`:
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/home_page.png" height="400" alt="Screenshots">
-</p>
 
 `Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
 > mithun.2121@yahoo.com | [LinkedIn](https://www.linkedin.com/in/mithun1st/) | [GitHub](https://www.github.com/mithun1st/) | [Website](https://mithun1st.blogspot.com/)

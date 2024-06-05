@@ -1,6 +1,6 @@
 library;
 
-export 'src/server.dart';
+export 'src/service/server.dart';
 export 'src/constant/extension.dart';
 export 'src/constant/enum.dart';
 export 'src/helper/network.dart';
