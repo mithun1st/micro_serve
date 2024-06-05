@@ -1,3 +1,7 @@
+## 1.0.8
+- Execute dart format .
+- Add gif
+
 ## 1.0.7
 - Set 200 statusCode as default
 - update example/lib/main.dart
