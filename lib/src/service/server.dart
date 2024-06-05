@@ -5,15 +5,28 @@ import 'package:micro_serve/src/common/common.dart';
 abstract class _BaseService {
   static HttpServer? _httpServer;
 
-  Future<void> _write(HttpRequest httpRequest, Response response) async {
-    httpRequest.response.statusCode = response.statusCode ?? HttpStatus.ok_200.code;
+  Future<void> _write(
+    HttpRequest httpRequest,
+    Response response,
+  ) async {
+    void printLog() {
+      final String date = Format.date(DateTime.now());
+      final String time = Format.date(DateTime.now());
+      final String method = httpRequest.method;
+      final int? statusCode = response.statusCode;
+      final String path = httpRequest.uri.path;
+      Logger.info("$date - $time\t$method\t$statusCode\t$path");
+    }
+
+    final int code = response.statusCode ?? HttpStatus.ok_200.code;
+    httpRequest.response.statusCode = code;
     if (response.data is Map || response.data is List) {
       response.data = jsonEncode(response.data);
     }
     httpRequest.response.write(response.data);
     await httpRequest.response.close();
-    final DateTime dt = DateTime.now();
-    Logger.info("${Format.date(dt)} - ${Format.time(dt)}\t${httpRequest.method}\t${response.statusCode}\t${httpRequest.uri.path}");
+
+    printLog();
   }
 
   Future<void> _threadOpen(HttpRequest httpRequest, Node node) async {
@@ -26,26 +39,42 @@ abstract class _BaseService {
     final Map params = httpRequest.uri.queryParameters;
     final String data = await utf8.decoder.bind(httpRequest).join();
 
-    final Request request = Request(queryParams: params, headers: {}, body: data);
+    final Request request = Request(
+      queryParams: params,
+      headers: {},
+      body: data,
+    );
     resCallBackFnc(Response response) => _write(httpRequest, response);
 
-    final ServerContext serverContext = ServerContext(request: request, send: resCallBackFnc);
+    final ServerContext serverContext = ServerContext(
+      request: request,
+      send: resCallBackFnc,
+    );
 
     final Function(ServerContext) handlerFnc = node.handler;
 
     try {
       await handlerFnc(serverContext);
     } catch (error) {
-      final Response response = Response.internalServerError(error.toString());
+      final Response response = Response.internalServerError(
+        error.toString(),
+      );
       await _write(httpRequest, response);
       Logger.error(error.toString());
     }
   }
 
-  Future<void> _start({required String ipAddress, required int port, required Map<String, Node> nodeList, required Function callBack}) async {
+  Future<void> _start({
+    required String ipAddress,
+    required int port,
+    required Map<String, Node> nodeList,
+    required Function callBack,
+  }) async {
     _httpServer = await HttpServer.bind(ipAddress, port);
 
-    Logger.print("Server listening on ${_httpServer?.address.address}:${_httpServer?.port}", 'debug');
+    final String? serverIp = _httpServer?.address.address;
+    final int? serverPort = _httpServer?.port;
+    Logger.print("Server listening on $serverIp:$serverPort", 'debug');
 
     callBack();
 
@@ -107,22 +136,38 @@ class MicroServe extends _BaseService {
   }
 
   void get(String path, Function(ServerContext) handler) {
-    final Node node = Node(method: Method.get, path: path, handler: handler);
+    final Node node = Node(
+      method: Method.get,
+      path: path,
+      handler: handler,
+    );
     _addNode(node);
   }
 
   void put(String path, Function(ServerContext) handler) {
-    final Node node = Node(method: Method.put, path: path, handler: handler);
+    final Node node = Node(
+      method: Method.put,
+      path: path,
+      handler: handler,
+    );
     _addNode(node);
   }
 
   void delete(String path, Function(ServerContext) handler) {
-    final Node node = Node(method: Method.delete, path: path, handler: handler);
+    final Node node = Node(
+      method: Method.delete,
+      path: path,
+      handler: handler,
+    );
     _addNode(node);
   }
 
   void patch(String path, Function(ServerContext) handler) {
-    final Node node = Node(method: Method.patch, path: path, handler: handler);
+    final Node node = Node(
+      method: Method.patch,
+      path: path,
+      handler: handler,
+    );
     _addNode(node);
   }
 
@@ -132,7 +177,11 @@ class MicroServe extends _BaseService {
     }
   }
 
-  void listen({required int port, String? ipAddress, Function? callBack}) {
+  void listen({
+    required int port,
+    String? ipAddress,
+    Function? callBack,
+  }) {
     _showAllNode();
 
     _start(
