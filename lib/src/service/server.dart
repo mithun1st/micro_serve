@@ -6,14 +6,16 @@ abstract class _BaseService {
   static HttpServer? _httpServer;
 
   Future<void> _write(HttpRequest httpRequest, Response response) async {
-    httpRequest.response.statusCode = response.statusCode ?? HttpStatus.ok_200.code;
+    httpRequest.response.statusCode =
+        response.statusCode ?? HttpStatus.ok_200.code;
     if (response.data is Map || response.data is List) {
       response.data = jsonEncode(response.data);
     }
     httpRequest.response.write(response.data);
     await httpRequest.response.close();
     final DateTime dt = DateTime.now();
-    Logger.info("${Format.date(dt)} - ${Format.time(dt)}\t${httpRequest.method}\t${response.statusCode}\t${httpRequest.uri.path}");
+    Logger.info(
+        "${Format.date(dt)} - ${Format.time(dt)}\t${httpRequest.method}\t${response.statusCode}\t${httpRequest.uri.path}");
   }
 
   Future<void> _threadOpen(HttpRequest httpRequest, Node node) async {
@@ -26,10 +28,12 @@ abstract class _BaseService {
     final Map params = httpRequest.uri.queryParameters;
     final String data = await utf8.decoder.bind(httpRequest).join();
 
-    final Request request = Request(queryParams: params, headers: {}, body: data);
+    final Request request =
+        Request(queryParams: params, headers: {}, body: data);
     resCallBackFnc(Response response) => _write(httpRequest, response);
 
-    final ServerContext serverContext = ServerContext(request: request, send: resCallBackFnc);
+    final ServerContext serverContext =
+        ServerContext(request: request, send: resCallBackFnc);
 
     final Function(ServerContext) handlerFnc = node.handler;
 
@@ -42,10 +46,16 @@ abstract class _BaseService {
     }
   }
 
-  Future<void> _start({required String ipAddress, required int port, required Map<String, Node> nodeList, required Function callBack}) async {
+  Future<void> _start(
+      {required String ipAddress,
+      required int port,
+      required Map<String, Node> nodeList,
+      required Function callBack}) async {
     _httpServer = await HttpServer.bind(ipAddress, port);
 
-    Logger.print("Server listening on ${_httpServer?.address.address}:${_httpServer?.port}", 'debug');
+    Logger.print(
+        "Server listening on ${_httpServer?.address.address}:${_httpServer?.port}",
+        'debug');
 
     callBack();
 

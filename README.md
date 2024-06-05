@@ -163,7 +163,7 @@ The functionality is not supported on Web.
 > App Screen `example/lib/main.dart`:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/home_page.png" height="500" alt="Screenshots">
+  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/home_page.png" height="400" alt="Screenshots">
 </p>
 
 `Micro Serve` plugin is developed by [Mahadi Hassan](https://www.linkedin.com/in/mithun1st/)
