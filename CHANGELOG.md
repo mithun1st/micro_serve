@@ -21,6 +21,9 @@
 ## 1.0.3
 - Content update
 
+## 1.0.2
+- Minor changes
+
 ## 1.0.1
 - Change Content
 

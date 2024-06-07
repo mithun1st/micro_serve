@@ -11,10 +11,11 @@ abstract class _BaseService {
   ) async {
     void printLog() {
       final String date = Format.date(DateTime.now());
-      final String time = Format.date(DateTime.now());
+      final String time = Format.time(DateTime.now());
       final String method = httpRequest.method;
       final int? statusCode = response.statusCode;
       final String path = httpRequest.uri.path;
+
       Logger.info("$date - $time\t$method\t$statusCode\t$path");
     }
 
@@ -29,6 +30,18 @@ abstract class _BaseService {
     printLog();
   }
 
+  Map<String, String> _buildHeaders(HttpHeaders headers) {
+    final Map<String, String> map = {};
+    for (String e in headers.toString().split('\n')) {
+      final String key = e.split(":")[0];
+      final String? value = headers.value(key);
+      if (value != null) {
+        map[key] = value;
+      }
+    }
+    return map;
+  }
+
   Future<void> _threadOpen(HttpRequest httpRequest, Node node) async {
     if (httpRequest.method != node.method.syntax) {
       final Response response = Response.methodNotAllowed();
@@ -36,19 +49,30 @@ abstract class _BaseService {
       return;
     }
 
-    final Map params = httpRequest.uri.queryParameters;
+    //request
     final String data = await utf8.decoder.bind(httpRequest).join();
 
     final Request request = Request(
-      queryParams: params,
-      headers: {},
+      queryParams: httpRequest.uri.queryParameters,
+      headers: _buildHeaders(httpRequest.headers),
       body: data,
     );
+
+    //response
     resCallBackFnc(Response response) => _write(httpRequest, response);
 
+    //client
+    final ConnectionInfo connectionInfo = ConnectionInfo(
+      address: httpRequest.connectionInfo?.remoteAddress.address,
+      port: httpRequest.connectionInfo?.remotePort,
+      addressType: httpRequest.connectionInfo?.remoteAddress.type.name,
+    );
+
+    //server context
     final ServerContext serverContext = ServerContext(
       request: request,
       send: resCallBackFnc,
+      connectionInfo: connectionInfo,
     );
 
     final Function(ServerContext) handlerFnc = node.handler;

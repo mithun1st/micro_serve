@@ -5,7 +5,7 @@
 The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages requests and server-side operations within applications.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/dev/example/screenshots/animation.gif" height="400" alt="example">
+  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/master/example/screenshots/animation.gif" width="500" alt="example">
 </p>
 
 
@@ -114,7 +114,7 @@ void _updateTask(ServerContext serverContext) {
   //Create an Object of Request() From ServerContext to Get Client Request
   final Request request = serverContext.request;
 
-  final int id = int.parse(request.queryParams["id"]);
+  final int id = int.parse(request.queryParams["id"]!);
   final String name = jsonDecode(request.body)['name'];
   final bool isDone = jsonDecode(request.body)['isDone'];
 
@@ -140,6 +140,7 @@ void _updateTask(ServerContext serverContext) {
 ```
 
 **`API Reference`**
+
 > Method [PUT]:
 ```url
 http://ip:port/update?id=1

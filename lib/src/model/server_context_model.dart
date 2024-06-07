@@ -3,18 +3,20 @@ import 'package:micro_serve/src/common/common.dart';
 class ServerContext {
   final Request request;
   final Function(Response) send;
-  // final String? clientIp;
+  final ConnectionInfo connectionInfo;
+
   ServerContext({
     required this.request,
     required this.send,
-    // this.clientIp,
+    required this.connectionInfo,
   });
 }
 
 class Request {
-  final Map queryParams;
-  final Map headers;
+  final Map<String, String> queryParams;
+  final Map<String, String> headers;
   final String body;
+
   Request({
     required this.queryParams,
     required this.headers,
@@ -25,6 +27,7 @@ class Request {
 class Response {
   int? statusCode;
   dynamic data;
+
   Response({
     this.statusCode,
     this.data,
@@ -38,4 +41,16 @@ class Response {
         statusCode: HttpStatus.internalServerError_500.code,
         data: Format.responseJsonFormat(error),
       );
+}
+
+class ConnectionInfo {
+  final String? address;
+  final int? port;
+  final String? addressType;
+
+  const ConnectionInfo({
+    this.address,
+    this.port,
+    this.addressType,
+  });
 }
