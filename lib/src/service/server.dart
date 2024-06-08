@@ -209,7 +209,7 @@ class MicroServe extends _BaseService {
     _showAllNode();
 
     _start(
-      ipAddress: ipAddress ?? Const.localIp,
+      ipAddress: ipAddress ?? Const.defaultIp,
       port: port,
       nodeList: _nodeList,
       callBack: callBack ?? () {},

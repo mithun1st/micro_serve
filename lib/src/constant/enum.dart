@@ -6,7 +6,11 @@ enum Method {
   patch,
 }
 
-enum NetworkType { local, wlan }
+enum NetworkType {
+  local,
+  wlan,
+  defaultIp,
+}
 
 enum HttpStatus {
   ok_200,

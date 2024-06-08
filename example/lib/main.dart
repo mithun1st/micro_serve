@@ -121,19 +121,24 @@ class _MyHomePageState extends State<MyHomePage> {
     final int id = int.parse(request.queryParams["id"]!);
     final String name = jsonDecode(request.body)['name'];
     final bool isDone = jsonDecode(request.body)['isDone'];
+    final String? apiKey = request.headers['api-key'];
+    // print('ClientIpAddress: ${serverContext.connectionInfo.address}');
 
     //Create an Object of Response() to Send Client
     final Response response = Response();
 
-    if (!_taskStore.containsKey(id)) {
+    if (apiKey != 'abcd1234') {
       //Edit Response Object as Preference 1
+      response.statusCode = HttpStatus.unauthorized_401.code;
+      response.data = {"message": "api key error"};
+    } else if (!_taskStore.containsKey(id)) {
+      //Edit Response Object as Preference 2
       response.statusCode = HttpStatus.notFound_404.code;
       response.data = {"message": "not found"};
     } else {
       _taskStore[id]!.name = name;
       _taskStore[id]!.isDone = isDone;
-
-      //Edit Response Object as Preference 2
+      //Edit Response Object as Preference 3
       response.statusCode = HttpStatus.accepted_202.code;
       response.data = {"message": "updated successfully"};
     }
