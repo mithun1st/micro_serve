@@ -117,13 +117,13 @@ void _updateTask(ServerContext serverContext) {
   final int id = int.parse(request.queryParams["id"]!);
   final String name = jsonDecode(request.body)['name'];
   final bool isDone = jsonDecode(request.body)['isDone'];
-  final String? key = request.headers['api-key'];
+  final String? apiKey = request.headers['api-key'];
   // print('ClientIpAddress: ${serverContext.connectionInfo.address}');
 
   //Create an Object of Response() to Send Client
   final Response response = Response();
 
-  if (key != 'abcd1234') {
+  if (apiKey != 'abcd1234') {
     //Edit Response Object as Preference 1
     response.statusCode = HttpStatus.unauthorized_401.code;
     response.data = {"message": "api key error"};
