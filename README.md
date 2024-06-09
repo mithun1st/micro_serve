@@ -5,7 +5,7 @@
 The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages requests and server-side operations within applications.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/master/example/screenshots/animation.gif" width="500" alt="example">
+  <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/master/example/screenshots/animation.gif" width="700" alt="example">
 </p>
 
 
@@ -19,10 +19,10 @@ The `micro_serve` package for Flutter is designed to initialize an HTTP server t
 *Define routes (GET, POST, PUT, DELETE, PATCH) and link them to request handlers.*
 
 - **Request Parsing:**
-*Read and parse query parameters, body, headers data from requests.*
+*Read and parse query parameters, headers and body from requests.*
 
 - **Response Handling:**
-*Create and send responses with status codes, headers, and content.*
+*Create and send responses with status codes and content.*
 
 - **Error Handling:**
 *Gracefully manage errors and send appropriate error responses.*
@@ -152,9 +152,9 @@ http://ip:port/update?id=1
 
 > Headers:
 
-|  key  |  value |
-|:-----:|:------:|
-|api-key|abcd1234| 
+|   key    |  value   |
+| :------: | :------: |
+| api-key  | abcd1234 | 
 
 
 > Body:

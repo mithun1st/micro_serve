@@ -1,3 +1,6 @@
+## 1.0.10
+- Version & Content update
+
 ## 1.0.9
 - Headers & Token implemented
 - Able to fetch client info like (ip, port etc.)
