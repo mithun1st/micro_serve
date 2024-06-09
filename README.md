@@ -19,7 +19,7 @@ The `micro_serve` package for Flutter is designed to initialize an HTTP server t
 *Define routes (GET, POST, PUT, DELETE, PATCH) and link them to request handlers.*
 
 - **Request Parsing:**
-*Read and parse query parameters and body data from requests.*
+*Read and parse query parameters, body, headers data from requests.*
 
 - **Response Handling:**
 *Create and send responses with status codes, headers, and content.*
@@ -60,7 +60,7 @@ import 'package:micro_serve/micro_serve.dart';
 void main() {
   final MicroServe server = MicroServe();
 
-  server.get("/hello", (ServerContext serverContext) async {
+  server.get("/test", (ServerContext serverContext) async {
     final Response response = Response(
       statusCode: 200,
       data: "Welcome Micro-Serve",
@@ -118,7 +118,6 @@ void _updateTask(ServerContext serverContext) {
   final String name = jsonDecode(request.body)['name'];
   final bool isDone = jsonDecode(request.body)['isDone'];
   final String? apiKey = request.headers['api-key'];
-  // print('ClientIpAddress: ${serverContext.connectionInfo.address}');
 
   //Create an Object of Response() to Send Client
   final Response response = Response();
@@ -156,7 +155,6 @@ http://ip:port/update?id=1
 |  key  |  value |
 |:-----:|:------:|
 |api-key|abcd1234| 
-
 
 
 > Body:

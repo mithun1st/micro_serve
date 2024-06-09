@@ -69,7 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void _welcome(ServerContext serverContext) {
     Response response = Response(
       statusCode: 200,
-      data: "Micro-Serve is Running",
+      data: {
+        "message": "Server is Running...",
+        "clientIp": serverContext.connectionInfo.address,
+      },
     );
     serverContext.send(response);
   }
@@ -122,7 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final String name = jsonDecode(request.body)['name'];
     final bool isDone = jsonDecode(request.body)['isDone'];
     final String? apiKey = request.headers['api-key'];
-    // print('ClientIpAddress: ${serverContext.connectionInfo.address}');
 
     //Create an Object of Response() to Send Client
     final Response response = Response();
