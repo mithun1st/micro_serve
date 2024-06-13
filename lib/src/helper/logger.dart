@@ -1,12 +1,13 @@
-import 'dart:developer';
+import 'package:micro_serve/src/common/dart.dart';
 
-class Logger {
-  static const String _packageName = 'MICRO_SERVE';
+mixin Logger {
+  static const String _title = 'MICRO_SERVE';
 
-  static void info(String msg) => log(msg, name: "$_packageName-INFO");
+  void logPrint(String msg) => log(msg, name: _title);
 
-  static void error(String msg) => log(msg, name: "$_packageName-Error");
+  void logInfo(String msg) => log(msg, name: "$_title-info");
 
-  static void print(String msg, String name) =>
-      log(msg, name: "$_packageName-$name");
+  void logDebug(String msg) => log(msg, name: "$_title-debug");
+
+  void logError(String msg) => log(msg, name: "$_title-error");
 }

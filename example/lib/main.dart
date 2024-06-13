@@ -53,8 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
     _server.listen(
       ipAddress: lanWifiIp,
       port: port,
-      callBack: () {
-        setState(() {});
+      callBack: (isServerInitiated) {
+        if (isServerInitiated) {
+          setState(() {});
+        } else {
+          // print('Some thing went wrong');
+        }
       },
     );
   }
@@ -66,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ///HANDLER FUNCTION
-  void _welcome(ServerContext serverContext) {
+  void _welcome(ServerContext serverContext) async {
     Response response = Response(
       statusCode: 200,
       data: {
@@ -77,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
     serverContext.send(response);
   }
 
-  void _createTask(ServerContext serverContext) {
+  void _createTask(ServerContext serverContext) async {
     final Request request = serverContext.request;
     final Task newTask = Task.fromJson(jsonDecode(request.body));
 
@@ -98,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     serverContext.send(response);
   }
 
-  void _readTasks(ServerContext serverContext) {
+  void _readTasks(ServerContext serverContext) async {
     final List<Map> taskList = [];
 
     for (Task task in _taskStore.values) {
@@ -117,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
     serverContext.send(response);
   }
 
-  void _updateTask(ServerContext serverContext) {
+  void _updateTask(ServerContext serverContext) async {
     //Create an Object of Request() From ServerContext to Get Client Request
     final Request request = serverContext.request;
 
@@ -125,6 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final String name = jsonDecode(request.body)['name'];
     final bool isDone = jsonDecode(request.body)['isDone'];
     final String? apiKey = request.headers['api-key'];
+
+    // print('client ip: ${serverContext.connectionInfo.address}');
 
     //Create an Object of Response() to Send Client
     final Response response = Response();
@@ -149,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
     serverContext.send(response);
   }
 
-  void _deleteTask(ServerContext serverContext) {
+  void _deleteTask(ServerContext serverContext) async {
     final Request request = serverContext.request;
     final int taskId = int.parse(request.queryParams["id"]!);
 

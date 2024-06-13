@@ -17,17 +17,6 @@ extension MethodSyntax on Method {
   }
 }
 
-// extension NetworkIp on NetworkType {
-//   String get ip {
-//     switch (this) {
-//       case NetworkType.local:
-//         return "127.0.0.1";
-//       case NetworkType.wlan:
-//         return "";
-//     }
-//   }
-// }
-
 extension HttpStatusCode on HttpStatus {
   int get code {
     switch (this) {
