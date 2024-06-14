@@ -1,4 +1,4 @@
-import 'package:micro_serve/src/constant/enum.dart';
+import 'package:micro_serve/src/common/constant.dart';
 
 extension MethodSyntax on Method {
   String get syntax {

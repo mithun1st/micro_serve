@@ -1,11 +1,11 @@
 import 'package:micro_serve/src/common/constant.dart';
 import 'package:micro_serve/src/common/dart.dart';
 import 'package:micro_serve/src/common/model.dart';
-import 'package:micro_serve/src/helper/logger.dart';
+import 'package:micro_serve/src/common/helper.dart';
 
 abstract class Thread with Logger {
-  bool _responseLog;
-  Thread(this._responseLog);
+  bool _showResponseLog;
+  Thread(this._showResponseLog);
 
   void _printResponseLog(
     HttpRequest httpRequest,
@@ -37,7 +37,7 @@ abstract class Thread with Logger {
     httpRequest.response.write(response.data);
     await httpRequest.response.close();
 
-    _responseLog ? _printResponseLog(httpRequest, response) : null;
+    _showResponseLog ? _printResponseLog(httpRequest, response) : null;
   }
 
   Map<String, String> _buildHeaders(HttpHeaders headers) {

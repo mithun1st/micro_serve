@@ -1,9 +1,8 @@
 import 'package:micro_serve/src/common/constant.dart';
 import 'package:micro_serve/src/common/dart.dart';
 import 'package:micro_serve/src/common/model.dart';
-import 'package:micro_serve/src/helper/logger.dart';
-import 'package:micro_serve/src/service/interface.dart';
-import 'package:micro_serve/src/service/thread.dart';
+import 'package:micro_serve/src/common/service.dart';
+import 'package:micro_serve/src/common/helper.dart';
 
 class BaseService extends Thread with Logger implements Server {
   BaseService(bool showResponseLog) : super(showResponseLog);

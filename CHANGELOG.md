@@ -1,6 +1,6 @@
 ## 1.0.11
-- Implement return bool on server.listener() callback function
-- Allow users to turn on/off response logger
+- Allow developers to turn on/off response log
+- Implement return bool with listener() callback function
 
 ## 1.0.10
 - Version & Content update

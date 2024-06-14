@@ -1,7 +1,6 @@
 import 'package:micro_serve/src/common/constant.dart';
 import 'package:micro_serve/src/common/model.dart';
-import 'package:micro_serve/src/service/base_service.dart';
-import 'package:micro_serve/src/service/interface.dart';
+import 'package:micro_serve/src/common/service.dart';
 
 class MicroServe implements Route {
   static final Map<String, Node> _nodeStore = {};

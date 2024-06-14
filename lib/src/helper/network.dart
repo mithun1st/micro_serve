@@ -1,6 +1,5 @@
 import 'package:micro_serve/src/common/dart.dart';
-import 'package:micro_serve/src/constant/const.dart';
-import 'package:micro_serve/src/constant/enum.dart';
+import 'package:micro_serve/src/common/constant.dart';
 
 class Network {
   static Future<String?> _findWlanIp() async {

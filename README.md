@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/micro_serve.svg)](https://pub.dev/packages/micro_serve)
 
-The `micro_serve` package for Flutter is designed to initialize an HTTP server that efficiently manages requests and server-side operations within applications.
+The `micro_serve` package for Flutter is designed to initialize an **HTTP server** that efficiently manages requests and server-side operations within applications using **raw Dart code**.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/mithun1st/micro_serve/master/example/screenshots/animation.gif" width="700" alt="example">
@@ -94,7 +94,7 @@ void _serverOn() async {
   _server.listen(
     ipAddress: lanWifiIp,
     port: port,
-    callBack: () {
+    callBack: (_) {
       print("Server initiated");
     },
   );
@@ -110,7 +110,7 @@ void _serverOff() async {
 
 > Handler Function:
 ```dart
-void _updateTask(ServerContext serverContext) {
+void _updateTask(ServerContext serverContext) async {
   //Create an Object of Request() From ServerContext to Get Client Request
   final Request request = serverContext.request;
 
