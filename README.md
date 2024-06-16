@@ -84,7 +84,7 @@ final MicroServe _server = MicroServe();
 ```dart
 void _serverOn() async {
   //Define Routes
-  _server.put('/update', _updateTask);
+  _server.put("/update", _updateTask);
 
   //Get WiFi IP Address
   final String? lanWifiIp = await Network.getIp(NetworkType.wlan);
@@ -111,21 +111,23 @@ void _serverOff() async {
 > Handler Function:
 ```dart
 void _updateTask(ServerContext serverContext) async {
-  //Create an Object of Request() From ServerContext to Get Client Request
+  //Get Client Request From Request() Of ServerContext
   final Request request = serverContext.request;
 
   final int id = int.parse(request.queryParams["id"]!);
-  final String name = jsonDecode(request.body)['name'];
-  final bool isDone = jsonDecode(request.body)['isDone'];
-  final String? apiKey = request.headers['api-key'];
+  final String name = jsonDecode(request.body)["name"];
+  final bool isDone = jsonDecode(request.body)["isDone"];
+  final String? apiKey = request.headers["api-key"];
+
+  // print("Client IP: ${serverContext.connectionInfo.address}");
 
   //Create an Object of Response() to Send Client
   final Response response = Response();
 
-  if (apiKey != 'abcd1234') {
+  if (apiKey != "abcd1234") {
     //Edit Response Object as Preference 1
     response.statusCode = HttpStatus.unauthorized_401.code;
-    response.data = {"message": "api key error"};
+    response.data = {"message": "invalid api key"};
   } else if (!_taskStore.containsKey(id)) {
     //Edit Response Object as Preference 2
     response.statusCode = HttpStatus.notFound_404.code;
@@ -133,6 +135,7 @@ void _updateTask(ServerContext serverContext) async {
   } else {
     _taskStore[id]!.name = name;
     _taskStore[id]!.isDone = isDone;
+
     //Edit Response Object as Preference 3
     response.statusCode = HttpStatus.accepted_202.code;
     response.data = {"message": "updated successfully"};

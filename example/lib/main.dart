@@ -39,11 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
   ///SERVER ON
   void _serverOn() async {
     //Define Route
-    _server.get('/', _welcome);
-    _server.post('/create', _createTask);
-    _server.get('/read', _readTasks);
-    _server.put('/update', _updateTask);
-    _server.delete('/delete', _deleteTask);
+    _server.get("/", _welcome);
+    _server.post("/create", _createTask);
+    _server.get("/read", _readTasks);
+    _server.put("/update", _updateTask);
+    _server.delete("/delete", _deleteTask);
 
     //Get WiFi IP Address
     final String? lanWifiIp = await Network.getIp(NetworkType.wlan);
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (isServerInitiated) {
           setState(() {});
         } else {
-          // print('Some thing went wrong');
+          // print("Some thing went wrong");
         }
       },
     );
@@ -122,23 +122,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _updateTask(ServerContext serverContext) async {
-    //Create an Object of Request() From ServerContext to Get Client Request
+    //Get Client Request From Request() Of ServerContext
     final Request request = serverContext.request;
 
     final int id = int.parse(request.queryParams["id"]!);
-    final String name = jsonDecode(request.body)['name'];
-    final bool isDone = jsonDecode(request.body)['isDone'];
-    final String? apiKey = request.headers['api-key'];
+    final String name = jsonDecode(request.body)["name"];
+    final bool isDone = jsonDecode(request.body)["isDone"];
+    final String? apiKey = request.headers["api-key"];
 
-    // print('client ip: ${serverContext.connectionInfo.address}');
+    // print("Client IP: ${serverContext.connectionInfo.address}");
 
     //Create an Object of Response() to Send Client
     final Response response = Response();
 
-    if (apiKey != 'abcd1234') {
+    if (apiKey != "abcd1234") {
       //Edit Response Object as Preference 1
       response.statusCode = HttpStatus.unauthorized_401.code;
-      response.data = {"message": "api key error"};
+      response.data = {"message": "invalid api key"};
     } else if (!_taskStore.containsKey(id)) {
       //Edit Response Object as Preference 2
       response.statusCode = HttpStatus.notFound_404.code;
@@ -146,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       _taskStore[id]!.name = name;
       _taskStore[id]!.isDone = isDone;
+
       //Edit Response Object as Preference 3
       response.statusCode = HttpStatus.accepted_202.code;
       response.data = {"message": "updated successfully"};
@@ -195,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         "Server running on...\nhttp://${_server.info.address}:${_server.info.port}/",
                         textAlign: TextAlign.center,
                       )
-                    : const Text('Server is offline now'),
+                    : const Text("Server is offline now"),
                 ElevatedButton(
                   onPressed: !_server.info.isRunning ? _serverOn : _serverOff,
                   child: Text(!_server.info.isRunning ? "Tap To Start" : "Stop"),

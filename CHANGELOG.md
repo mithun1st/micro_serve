@@ -1,5 +1,5 @@
 ## 1.0.11
-- Allow developers to turn on/off response log
+- Allow developers to turn on/off response logs
 - Implement return bool with listener() callback function
 
 ## 1.0.10
