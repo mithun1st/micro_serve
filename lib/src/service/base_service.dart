@@ -25,7 +25,7 @@ class BaseService extends Thread with Logger implements Server {
 
       final String? serverIp = _httpServer?.address.address;
       final int? serverPort = _httpServer?.port;
-      logPrint("Server listening on $serverIp:$serverPort");
+      logPrint("${Const.msgServerOn} $serverIp:$serverPort");
 
       callBack(true);
     } catch (error) {
@@ -37,16 +37,14 @@ class BaseService extends Thread with Logger implements Server {
     await for (HttpRequest httpRequest in _httpServer ?? ([] as HttpServer)) {
       final String path = httpRequest.uri.path;
       if (nodeList.keys.contains(path)) {
-        final Node? node = nodeList[path];
-        if (node != null) {
-          runInThread(httpRequest, node);
-        }
+        final Node node = nodeList[path]!;
+        runInThread(httpRequest, node);
       } else {
         await httpRequest.response.close();
       }
     }
 
-    logPrint("Server has been turned off");
+    logPrint(Const.msgServerOff);
   }
 
   @override

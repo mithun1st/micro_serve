@@ -35,7 +35,7 @@ class Response {
 
   factory Response.methodNotAllowed() => Response(
         statusCode: HttpStatus.methodNotAllowed_405.code,
-        data: Format.responseJsonFormat("Method Not Allowed"),
+        data: Format.responseJsonFormat(Const.msgMethodNotAllowed),
       );
   factory Response.internalServerError(String error) => Response(
         statusCode: HttpStatus.internalServerError_500.code,

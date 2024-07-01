@@ -13,7 +13,7 @@ class Network {
 
   static Future<String?> getIp(NetworkType networkType) async {
     switch (networkType) {
-      case NetworkType.defaultIp:
+      case NetworkType.default_:
         return Const.defaultIp;
       case NetworkType.local:
         return Const.localIp;

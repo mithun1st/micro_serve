@@ -20,9 +20,9 @@ abstract class Thread with Logger {
     final String path = httpRequest.uri.path;
 
     final String? ip = httpRequest.connectionInfo?.remoteAddress.address;
-    final String clientIp = ip ?? 'x.x.x.x';
+    final String clientIp = ip ?? Const.msgNullIp;
 
-    logDebug('|$date - $time|\t|$statusCode|\t|$clientIp|\t|$method|\t$path');
+    logDebug("|$date - $time|\t|$statusCode|\t|$clientIp|\t|$method|\t$path");
   }
 
   Future<void> _write(
@@ -43,7 +43,7 @@ abstract class Thread with Logger {
   Map<String, String> _buildHeaders(HttpHeaders headers) {
     final Map<String, String> map = {};
     for (String element in headers.toString().split('\n')) {
-      final String key = element.split(":")[0];
+      final String key = element.split(":").first;
       final String? value = headers.value(key);
       if (value != null) {
         map[key] = value;

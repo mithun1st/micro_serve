@@ -9,7 +9,7 @@ enum Method {
 enum NetworkType {
   local,
   wlan,
-  defaultIp,
+  default_,
 }
 
 enum HttpStatus {
